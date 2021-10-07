@@ -1,36 +1,26 @@
 <?php
 /*
-Plugin Name: Recipe
-Plugin URI: http://traversymedia.com
-Description: A simple wordpress plugin
-Version: 1.0
-Author: Deosebit Soft
-Author URI: http://traversymedia.com
-Text-domain: recipe
+Plugin Name: Recipe Plugin
 */
 
 
-
-if(!function_exists('add_action')){
-	echo "Hi there I'm just a plugin";
-	exit;
+if (!function_exists('add_action')) {
+    echo "Exit";
+    exit;
 }
 
 
+//Setup
 
-//Setup 
+// Includes
+include('includes/activate.php');
+include('includes/init.php');
+include('save-post.php');
 
-
-//Includes 
-require_once(plugin_dir_path(__FILE__).'/includes/activate.php');
-require_once(plugin_dir_path(__FILE__).'/includes/init.php');
-require_once(plugin_dir_path(__FILE__).'/process/save-post.php');
-require_once(plugin_dir_path(__FILE__).'/process/filter-content.php');
 //Hooks
-register_activation_hook( __FILE__ , 'r_activate_plugin' );
+register_activation_hook(__FILE__, 'r_activate_file');
 add_action('init', 'recipe_init');
 add_action('save_post_recipe', 'r_save_post_admin', 10, 3);
-add_filter('the_content', 'r_filter_recipe_content');
-//Shortcodes
 
 
+// Shortcodes
